@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/gpaCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/gpaRelativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/gpaInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Your GPA is"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/wGPA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/gpaInfo"
+                android:layout_marginLeft="16dp"
+                android:layout_toEndOf="@+id/wGPAInfo"
+                android:layout_toRightOf="@+id/wGPAInfo"
+                android:text="0.0"
+                android:layout_marginTop="20dp"
+                android:textColor="#ffffc838"
+                android:textSize="30dp" />
+
+
+            <TextView
+                android:id="@+id/wGPAInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/gpaInfo"
+                android:layout_marginTop="20dp"
+                android:text="Weighted:"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/uGPA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/wGPAInfo"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_toEndOf="@+id/uGPAInfo"
+                android:layout_toRightOf="@+id/uGPAInfo"
+                android:text="0.0"
+                android:textColor="#ffffc838"
+                android:textSize="30dp" />
+
+
+            <TextView
+                android:id="@+id/uGPAInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="16dp"
+                android:layout_below="@id/wGPAInfo"
+                android:text="Unweighted:"
+                android:textSize="30dp"
+
+                />
+
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

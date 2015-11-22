@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <Button
+        android:id="@+id/businessCourses"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/businessText"
+        android:background="@color/accent_material_dark"
+        android:clickable="true"
+        android:onClick="courseHandler" />
+    <Button
+        android:id="@+id/englishCourses"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/englishText"
+        android:background="@color/accent_material_dark"
+        android:clickable="true"
+        android:onClick="courseHandler" />
+    <Button
+        android:id="@+id/familyCourses"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/familyText"
+        android:background="@color/accent_material_dark"
+        android:clickable="true"
+        android:onClick="courseHandler" />
+    <Button
+        android:id="@+id/mathCourses"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/mathText"
+        android:background="@color/accent_material_dark"
+        android:clickable="true"
+        android:onClick="courseHandler" />
+
+    <Button
+        android:id="@+id/scienceCourses"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/scienceText"
+        android:background="@color/accent_material_dark"
+        android:clickable="true"
+        android:onClick="courseHandler" />
+
+    <Button
+        android:id="@+id/socialStudiesCourses"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/socialStudiesText"
+        android:background="@color/accent_material_dark"
+        android:clickable="true"
+        android:onClick="courseHandler" />
+
+    <Button
+        android:id="@+id/artCourses"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/visualArtText"
+        android:background="@color/accent_material_dark"
+        android:clickable="true"
+        android:onClick="courseHandler" />
+
+    <Button
+        android:id="@+id/wellnessCourses"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/wellnessText"
+        android:background="@color/accent_material_dark"
+        android:clickable="true"
+        android:onClick="courseHandler" />
+
+    <Button
+        android:id="@+id/languageCourses"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/worldLanguagesText"
+        android:background="@color/accent_material_dark"
+        android:clickable="true"
+        android:onClick="courseHandler" />
+
+</LinearLayout>

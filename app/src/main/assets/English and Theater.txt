@@ -1,0 +1,41 @@
+English 9_CP_5.0_F
+English 9 Literary World Views_CP_5.0_F
+English 10_CP_5.0_F
+English 10 Honors_H_5.0_F
+English 10 American Studies_H_5.0_F
+English 10 AHLISA_H_5.0_F
+English 11_CP_5.0_F
+English 11 Honors_H_5.0_F
+English 11 American Studies_H_5.0_F
+English 11 AHLISA_H_5.0_F
+English 11 RAHP_H_5.0_F
+English 12_CP_5.0_F
+English 12 Honors_H_5.0_F
+Senior Seminar_AP_5.0_F
+English 12 Advanced Placement_AP_5.0.F
+English Prep_CP_2.5_S
+English 9/English Enrichment_CP_5.0_F
+Strategic Reading_CP_5.0_F
+Acting I_CP_5.0_S
+Advanced Acting_CP_5.0_S
+Creative Writing_H_2.5_S
+Crime & Mystery Fiction_H_2.5_S
+Literature & Film College Prep_CP_5.0_F
+Literature & Film Honors_H_5.0_F
+Literature & Psychology_H_5.0_F
+Young Adult Literature I_CP_2.5_S
+Dramatic Literature_H_5.0_F
+Literature, Identity, and Media CP_CP_5.0_F
+Literature, Identity, and Media Honors_H_5.0_F
+Myth, Legend & the Bible_H_5.0_F
+Non_Fiction Creative Writing_CP_2.5_S
+Non_Fiction Creative Writing Honors_H_2.5_S
+Philosophy & Literature_H_5.0_F
+Studies in Shakespeare I/II_H_5.0_F
+Theater Arts I_CP_2.5_S
+Theater Arts II_CP_2.5_S
+Theater Design/Stage Craft_CP_2.5_S
+Senior Yearbook_CP_2.5_S
+Journalism Production I_CP_5.0_F
+Journalism Production II_CP_5.0_F
+ESL: English as a Second Language_CP_5.0_F

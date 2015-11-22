@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">RHS GPA</string>
+    <string name="action_settings">Settings</string>
+    <string name="mainButtonText">Select Your Grade</string>
+    <string name="mainTextView">This is the main page</string>
+    <string name="gradeShowerText">Your GPA:</string>
+    <string name="selectGradeText">Select Your Grade</string>
+    <string name="smallButtonText">:</string>
+    <string name="cpText">College Prep</string>
+    <string name="honorsText">Honors</string>
+    <string name="apText">AP</string>
+    <string name="credits">Credits</string>
+    <string name="businessText">Business and Marketing</string>
+    <string name="englishText">English and Theater</string>
+    <string name="familyText">Family and Consumer Science</string>
+    <string name="mathText">Mathematics and Computer Science</string>
+    <string name="scienceText">Science</string>
+    <string name="socialStudiesText">Social Studies and Social Sciences</string>
+    <string name="visualArtText">Visual Art and Career</string>
+    <string name="wellnessText">Wellness</string>
+    <string name="worldLanguagesText">World Languages</string>
+</resources>

@@ -1,0 +1,50 @@
+Advertising Art_CP_2.5_S
+Advanced Advertising Art_CP_2.5_S
+Architectural Design I_CP_5.0_F
+Architectural Design II_CP_5.0_F
+Art History AP_AP_5.0_F
+Ceramics I_CP_2.5_S
+Ceramics II_CP_2.5_S
+Digital Painting_CP_2.5_S
+Digital Photography I_CP_2.5_S
+Digital Photography II_CP_2.5_S
+Advanced Digital Photography_CP_2.5_S
+Fundamental Drawing_CP_2.5_S
+Introduction to Studio Art_CP_2.5_S
+Intermediate Studio Art_CP_5.0_F
+Jewelry and Metal Design I_CP_2.5_S
+Jewelry and Metal Design II_CP_2.5_S
+Painting I: Acrylic_CP_2.5_S
+Painting I: Watercolor_CP_2.5_S
+Painting II_CP_2.5_S
+Sculpture_CP_2.5_S
+Studio Art I AP_AP_5.0_F
+Studio Art II AP_AP_5.0_F
+TV Production I_CP_2.5_S
+TV Production II_CP_2.5_S
+TV Production III_CP_2.5_S
+Graphics Arts I_CP_2.5_S
+Graphics Arts II_CP_2.5_S
+Graphics Arts III_CP_5.0_F
+Graphics Arts IV_CP_5.0_F
+Media Technology_CP_2.5_S
+Research & Design_CP_2.5_S
+Structural Applications I (Semester)_CP_2.5_S
+Structural Applications I (Full Year)_CP_5.0_F
+Structural Applications II_CP_5.0_F
+AHLISA_CP_1.0_F
+Introduction to 21st Century Music Production_CP_2.5_S
+Music Rewind_CP_2.5_S
+Music Theory AP_AP_5.0_F
+Dance_CP_2.5_S
+Advanced Dance_CP_2.5_S
+Symphonic Band_CP_5.0_F
+Concert Band_CP_5.0_F
+Wind Ensemble_CP_5.0_F
+Chorale_CP_5.0_F
+Concert Choir_CP_5.0_F
+Chamber Choir_CP_5.0_F
+Symphonic Orchestra_CP_5.0_F
+Concert Orchestra_CP_5.0_F
+Chamber Orchestra_CP_5.0_F
+Music Mentors_H_1.25_F

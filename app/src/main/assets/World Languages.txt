@@ -1,0 +1,30 @@
+Chinese I_CP_5.0_F
+Chinese II_CP_5.0_F
+Chinese III_H_5.0_F
+Chinese IV_H_5.0_F
+French I_CP_5.0_F
+French II_CP_5.0_F
+French III_H_5.0_F
+French IV_H_5.0_F
+French V_H_5.0_F
+French V AP_AP_5.0_F
+German I_CP_5.0_F
+German II_CP_5.0_F
+German III_H_5.0_F
+German IV_H_5.0_F
+Spanish I_CP_5.0_F
+Spanish II_CP_5.0_F
+Spanish III_CP_5.0_F
+Spanish III Honors_H_5.0_F
+Spanish IV_H_5.0_F
+Spanish V_H_5.0_F
+Spanish V AP_AP_5.0_F
+Spanish I/IIB_CP_5.0_F
+Spanish IIC_CP_5.0_F
+German IV_H_5.0_F
+Latin I_CP_5.0_F
+Latin II_CP_5.0_F
+Latin III Honors_H_5.0_F
+Latin IV_H_5.0_F
+Latin V_H_5.0_F
+Latin V AP_AP_5.0_F
