@@ -36,7 +36,7 @@ public class BusinessAndMarketing extends AppCompatActivity implements View.OnCl
     //private ScrollView scrollView;
     private String buttonTitles[];
     private String TITLE = "";
-    private int classIndex;
+    private int classIndex, fragmentNumber;
     private int classNumber; //indicates which class the user is on
 
 
@@ -50,7 +50,10 @@ public class BusinessAndMarketing extends AppCompatActivity implements View.OnCl
         //GET THE INTENT
         Intent intent = getIntent();
         String classInfo = intent.getStringExtra(CourseMenu.CONTEXT);
-        classNumber = Integer.parseInt(intent.getStringExtra(Values.CLASSINDEXTAG));
+
+        String split[] = intent.getStringExtra(Values.CLASSINDEXTAG).split(":");
+        fragmentNumber = Integer.parseInt(split[0]);
+        classNumber = Integer.parseInt(split[1]);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -177,7 +180,7 @@ public class BusinessAndMarketing extends AppCompatActivity implements View.OnCl
             if (v == selectButton[i]) {
                 Intent intent = new Intent(this, EditClass.class);
                 intent.putExtra(CLASSTAG, buttonTitles[i]);
-                intent.putExtra(Values.CLASSINDEXTAG, String.valueOf(classNumber));
+                intent.putExtra(Values.CLASSINDEXTAG, String.valueOf(fragmentNumber) + ":" + classNumber);
                 //Log.w(TAG, "SELECTED: " + String.valueOf(i));
                 Log.w(TAG,"CLASSNUMBER:"  +  String.valueOf(classNumber));
                 startActivity(intent);

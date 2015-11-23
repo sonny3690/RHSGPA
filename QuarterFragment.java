@@ -39,6 +39,12 @@ public class QuarterFragment extends Fragment {
 
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        viewModeAdapter.saveFile();
+    }
+
     class ViewPagerAdapter extends PagerAdapter {
 
         @Override
@@ -74,21 +80,15 @@ public class QuarterFragment extends Fragment {
             container.removeView((View) object);
         }
     }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        viewModeAdapter.saveFile();
-    }
 }
 
 
 
 
 /*TODO
- * link ViewMode methods with instatiate Item
+ - edit saving procedure
  * change some color crap
- * put file on github?
+
  * actionbar title
  */
 

@@ -25,7 +25,7 @@ public class Values {
 
     public Values (){
         for (int i =0; i< numOfClasses; i++){
-            FRAGMENTCODE [i] = String.valueOf(i);
+            FRAGMENTCODE[i] = "PAGEFRAGMENT" + String.valueOf(i);
         }
 
 

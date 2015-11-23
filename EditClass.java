@@ -22,7 +22,7 @@ public class EditClass extends AppCompatActivity {
     private TextView selectCreditsText, classNameInput;
     private Button CPButton, honorsButton, APButton, courseCatalogButton, okayButton;
 
-    private int buttonToggle, classNumber;
+    private int buttonToggle, classNumber, fragmentNumber;
     private double credits;
 
     private SharedPreferences reader;
@@ -41,7 +41,10 @@ public class EditClass extends AppCompatActivity {
         String classInfo = intent.getStringExtra(Values.CLASSTAG);
 
         if (intent != null) {
-            classNumber = Integer.parseInt(intent.getStringExtra(Values.CLASSINDEXTAG));
+            String split[] = intent.getStringExtra(Values.CLASSINDEXTAG).split(":");
+            fragmentNumber = Integer.parseInt(split[0]);
+            classNumber = Integer.parseInt(split[1]);
+
         } else Log.w("EditClass", "EditClass Intent is null!");
 
         if (classInfo != null) {

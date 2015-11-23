@@ -16,7 +16,7 @@ public class CourseMenu extends AppCompatActivity implements View.OnClickListene
 
     public static String CONTEXT = "courseMenu";
     private Button button[] = new Button[9];
-    private int classNumber;
+    private int classNumber, fragmentNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,14 +50,18 @@ public class CourseMenu extends AppCompatActivity implements View.OnClickListene
 
         Intent intent = getIntent();
 
-        if (intent != null){
+        if (intent != null) {
+            try {
+                String temp = intent.getStringExtra(Values.CLASSINDEXTAG);
+                String split[] = temp.split(":");
 
-            try{
-            classNumber = Integer.parseInt(intent.getStringExtra(Values.CLASSINDEXTAG));}
-            catch(NumberFormatException e){
+                fragmentNumber = Integer.parseInt(split[0]);
+                classNumber = Integer.parseInt(split[1]);
+            } catch (NumberFormatException e) {
                 classNumber = 0;
+                fragmentNumber = 0;
             }
-            Log.w("CourseMenu.class", String.valueOf(classNumber));
+            Log.w("CourseMenu.class", String.valueOf(fragmentNumber) + ", " + classNumber);
         }
     }
 
@@ -79,7 +83,7 @@ public class CourseMenu extends AppCompatActivity implements View.OnClickListene
     public void onClick(View v) {
         Intent intent = new Intent(v.getContext(), BusinessAndMarketing.class);
         intent.putExtra(CONTEXT, String.valueOf(v.getId()));
-        intent.putExtra(Values.CLASSINDEXTAG, String.valueOf(classNumber)); //sends the number of the fragment
+        intent.putExtra(Values.CLASSINDEXTAG, String.valueOf(fragmentNumber) + ":" + classNumber); //sends the number of the fragment
 
         startActivity(intent);
 
@@ -88,7 +92,6 @@ public class CourseMenu extends AppCompatActivity implements View.OnClickListene
 
 
     }
-
 
 
 }

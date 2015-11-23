@@ -2,7 +2,6 @@ package com.app.sonny.rhsgpa;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
@@ -28,15 +27,17 @@ import java.util.LinkedList;
  */
 public class ViewModeAdapter {
 
-    View view;
-
     public static final String CONTEXT = "com.app.Sonny";
-
     private final static int numOfClasses = 7; //number of total classes the person is taking
     public static int numOfActivatedClasses = 0;
     private final String saveTag = "com.app.Sonny.save";
     private final String readTag = "com.app.Sonny.read";
     private final String debugTag = "com.app.Sonny.debug";
+    View view;
+    ViewPager pager;
+    SlidingTabLayout tabs;
+    CharSequence Titles[] = {"Quarter 1", "Quarter 2", "Quarter 3"};
+    int Numboftabs = Titles.length;
     private SeekBar mainSeekBar[] = new SeekBar[numOfClasses];
     private TextView selectGradeText[] = new TextView[numOfClasses];
     private TextView wGPAField, uGPAField;
@@ -55,13 +56,7 @@ public class ViewModeAdapter {
     private LinearLayout mainAppLayout;
     private SharedPreferences reader;
     private int fragNum;
-
     private String classContent[][]; //saved class information; recalled when readFile () is activated
-
-    ViewPager pager;
-    SlidingTabLayout tabs;
-    CharSequence Titles[] = {"Quarter 1",  "Quarter 2", "Quarter 3"};
-    int Numboftabs = Titles.length;
 
     public ViewModeAdapter (LayoutInflater inflater, ViewGroup container, boolean bundle, int fragNum){
         view = inflater.inflate(R.layout.view_mode, container, bundle);
@@ -70,7 +65,18 @@ public class ViewModeAdapter {
         init ();
     }
 
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
+    }
+
     public void init (){
+
+        // readFile();
+
         vClassNameInput[0] = (TextView) view.findViewById(R.id.vClassNameInput0);
         vClassNameInput[1] = (TextView) view.findViewById(R.id.vClassNameInput1);
         vClassNameInput[2] = (TextView) view.findViewById(R.id.vClassNameInput2);
@@ -179,7 +185,7 @@ public class ViewModeAdapter {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), CourseMenu.class);
-                intent.putExtra(Values.CLASSINDEXTAG, String.valueOf(numOfActivatedClasses));
+                intent.putExtra(Values.CLASSINDEXTAG, String.valueOf(fragNum) + ":" + numOfActivatedClasses);
                 view.getContext().startActivity(intent);
 
 
@@ -189,7 +195,6 @@ public class ViewModeAdapter {
 
 
     }
-
 
     public void setSeekBar(SeekBar seekbar, int max, final int i) {
         seekbar.setMax(max);
@@ -268,6 +273,7 @@ public class ViewModeAdapter {
             }
         });
     }
+
     public void calculateGPA(int gradeCode[], double credits[], int classLevel[], boolean weighted) {
 
         double totalCredits = 0;
@@ -418,14 +424,6 @@ public class ViewModeAdapter {
         }
     }
 
-    public static double round(double value, int places) {
-        if (places < 0) throw new IllegalArgumentException();
-
-        BigDecimal bd = new BigDecimal(value);
-        bd = bd.setScale(places, RoundingMode.HALF_UP);
-        return bd.doubleValue();
-    }
-
     public void removeCardElements(int i) {
         String creditsTemp[] = new String[numOfClasses];
         String classNameTemp[] = new String[numOfClasses];
@@ -459,7 +457,7 @@ public class ViewModeAdapter {
         vCardView[numOfActivatedClasses - 1].setVisibility(View.GONE); //removes the last element
         numOfActivatedClasses--;
 
-        //saveFile();
+        saveFile();
 
     }
 
@@ -584,9 +582,9 @@ public class ViewModeAdapter {
             }
 
             String saveInfo = className + "_" + gradeCode[i] + "_" + credits[i] + "_" + buttonToggle[i];
-            editor.putString(Values.FRAGMENTCODE[i], saveInfo);
+            editor.putString(Values.FRAGMENTCODE[fragNum], saveInfo);
 
-            Log.w(saveTag, "SAVED:" + Values.FRAGMENTCODE[i] + ", " + saveInfo);
+            Log.w(saveTag, "SAVED:" + Values.FRAGMENTCODE[fragNum] + ", " + saveInfo);
             //editor.commit();
 
         }
