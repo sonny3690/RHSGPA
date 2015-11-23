@@ -16,9 +16,10 @@ import com.app.sonny.rhsgpa.slidingtab.SlidingTabLayout;
  * Created by Sonny on 9/7/2015.
  */
 public class QuarterFragment extends Fragment {
-    ViewPager mPager ;
+    ViewPager mPager;
     SlidingTabLayout mSlidingTabLayout;
     ScrollView mScrollView;
+    ViewModeAdapter viewModeAdapter;
 
     @Nullable
     @Override
@@ -33,19 +34,8 @@ public class QuarterFragment extends Fragment {
         mPager = (ViewPager) view.findViewById(R.id.pager);
         mPager.setAdapter(new ViewPagerAdapter());
 
-       /* mScrollView = (ScrollView) view.findViewById(R.id.quarterScrollView);*/
-
         mSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.tabs);
         mSlidingTabLayout.setViewPager(mPager);
-
-       /* mPager.setOnTouchListener(new View.OnTouchListener() {
-
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    mPager.getParent().requestDisallowInterceptTouchEvent(true);
-                    return false;
-                }
-            });*/
 
     }
 
@@ -67,23 +57,14 @@ public class QuarterFragment extends Fragment {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            // Inflate a new layout from our resources
 
+            viewModeAdapter = new ViewModeAdapter(getActivity().getLayoutInflater(), container, false, position);
+            View view = viewModeAdapter.getView();
 
-            View view = getActivity().getLayoutInflater().inflate(R.layout.view_mode,
-                    container, false);
-            // Add the newly created View to the ViewPager
+            /*View view = getActivity().getLayoutInflater().inflate(R.layout.view_mode,
+                    container, false);*/
             container.addView(view);
 
-
-           /* TextView title = (TextView)view.findViewById(R.id.selectLevelText0);
-            title.setText("CHANGED!!!!\t" + position );
-*/
-            // Retrieve a TextView from the inflated View, and update it's text
-            //TextView title = (TextView) view.findViewById(R.id.item_title);
-            //title.setText("Quarter " + String.valueOf(position + 1));
-
-            // Return the View
             return view;
         }
 
@@ -94,14 +75,21 @@ public class QuarterFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        viewModeAdapter.saveFile();
+    }
 }
+
+
 
 
 /*TODO
  * link ViewMode methods with instatiate Item
  * change some color crap
  * put file on github?
- *
+ * actionbar title
  */
 
 

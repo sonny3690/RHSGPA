@@ -1,8 +1,9 @@
 package com.app.sonny.rhsgpa;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.preference.PreferenceManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
 import android.util.Log;
@@ -23,9 +24,11 @@ import java.util.Arrays;
 import java.util.LinkedList;
 
 /**
- * Created by Sonny on 8/14/2015.
+ * Created by Sonny on 11/22/2015.
  */
-public class ViewMode extends Fragment{
+public class ViewModeAdapter {
+
+    View view;
 
     public static final String CONTEXT = "com.app.Sonny";
 
@@ -51,6 +54,7 @@ public class ViewMode extends Fragment{
     private boolean vClassVisibility[] = new boolean[numOfClasses];
     private LinearLayout mainAppLayout;
     private SharedPreferences reader;
+    private int fragNum;
 
     private String classContent[][]; //saved class information; recalled when readFile () is activated
 
@@ -59,13 +63,14 @@ public class ViewMode extends Fragment{
     CharSequence Titles[] = {"Quarter 1",  "Quarter 2", "Quarter 3"};
     int Numboftabs = Titles.length;
 
+    public ViewModeAdapter (LayoutInflater inflater, ViewGroup container, boolean bundle, int fragNum){
+        view = inflater.inflate(R.layout.view_mode, container, bundle);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.view_mode, container, false);
+        this.fragNum = fragNum;
+        init ();
+    }
 
-        Log.w(CONTEXT, "view created");
-
+    public void init (){
         vClassNameInput[0] = (TextView) view.findViewById(R.id.vClassNameInput0);
         vClassNameInput[1] = (TextView) view.findViewById(R.id.vClassNameInput1);
         vClassNameInput[2] = (TextView) view.findViewById(R.id.vClassNameInput2);
@@ -137,6 +142,9 @@ public class ViewMode extends Fragment{
         vCardView[5] = (CardView) view.findViewById(R.id.cardView5);
         vCardView[6] = (CardView) view.findViewById(R.id.cardView6);
 
+
+        vClassNameInput[0].setText ("2332");
+
         for (int i = 0; i < numOfClasses; i++) {
             setSeekBar(mainSeekBar[i], 11, i);
             vCardView[i].setVisibility(View.GONE);
@@ -147,7 +155,7 @@ public class ViewMode extends Fragment{
                         if (trashImageButton[i] == view)
                             // vCardView[i].setVisibility(View.GONE);
                             removeCardElements(i);
-                            Log.w("YAYA", "YAYYY");
+                        Log.w("YAYA", "YAYYY");
 
 
                     }
@@ -155,10 +163,33 @@ public class ViewMode extends Fragment{
             });
         }
 
+        reader = PreferenceManager.getDefaultSharedPreferences(view.getContext().getApplicationContext());
+        //mainSeekBar[0] = (SeekBar) findViewById(R.id.mainSeekBar0);
+        //selectGradeText[0] = (TextView) findViewById(R.id.selectGradeText0);
+
+        wGPAField = (TextView) view.findViewById(R.id.wGPA);
+        //wGPAField = (TextView) findViewById(Integer.parseInt("R.id.wGPA"));
+        uGPAField = (TextView) view.findViewById(R.id.uGPA);
+
+        credits = new double[numOfClasses];
+        classContent = new String[numOfClasses][4]; //1 for class name, 2 for gradecode, 3 for credits, 4 for duration
+
+        addClassButton = (Button) view.findViewById(R.id.addClassButton);
+        addClassButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), CourseMenu.class);
+                intent.putExtra(Values.CLASSINDEXTAG, String.valueOf(numOfActivatedClasses));
+                view.getContext().startActivity(intent);
 
 
-        return view;
+            }
+        });
+
+
+
     }
+
 
     public void setSeekBar(SeekBar seekbar, int max, final int i) {
         seekbar.setMax(max);
@@ -237,7 +268,6 @@ public class ViewMode extends Fragment{
             }
         });
     }
-
     public void calculateGPA(int gradeCode[], double credits[], int classLevel[], boolean weighted) {
 
         double totalCredits = 0;
@@ -447,5 +477,125 @@ public class ViewMode extends Fragment{
         return b;
     }
 
+    public void readFile() {
+        String generalTemp = reader.getString(Values.GENERALSAVEDINFO, null);
 
+        try {
+            numOfActivatedClasses = Integer.parseInt(generalTemp);
+            Log.w(CONTEXT, generalTemp);
+        } catch (Exception e) {
+            numOfActivatedClasses = 0;
+        }
+
+
+        for (int i = 0; i < numOfActivatedClasses; i++) {
+            vCardView[i].setVisibility(View.VISIBLE);
+        }
+
+        String separated[] = new String[4];
+        String[] fragTemp = new String[numOfClasses];
+
+        for (int i = 0; i < numOfClasses; i++) {
+            fragTemp[i] = reader.getString(Values.FRAGMENTCODE[i], null); //EACH  CLASS INFORMATION}
+        }
+
+        for (int i = 0; i < numOfClasses; i++) {
+            try {
+                separated = fragTemp[i].split("_");
+            } catch (Exception e) {
+                return;
+            }
+            if (separated[0] == null) {
+                return;
+            }
+
+
+            int index = i;
+
+            vClassNameInput[index].setText(separated[0]);
+            //mainSeekBar[index].setProgress(Integer.parseInt(separated[1]));
+            try {
+                gradeCode[index] = Integer.parseInt(separated[1]);
+                mainSeekBar[index].setProgress(Integer.parseInt(separated[1]));
+            } catch (NumberFormatException e) {
+
+            }
+            vCredits[index].setText("Credits: " + separated[2]);
+            credits[index] = Double.parseDouble(separated[2]);
+            //Log.w(readTag, "separated[2]: "  +separated[2]);
+            switch (Integer.parseInt(separated[3])) {
+                case 0:
+                    vClassLevel[index].setText("College Prep");
+                    break;
+                case 1:
+                    vClassLevel[index].setText("Honors");
+                    break;
+                case 2:
+                    vClassLevel[index].setText("AP");
+                    break;
+            }
+
+            buttonToggle[index] = Integer.parseInt(separated[3]);
+
+            //buttonToggle[index] = Integer.parseInt(separated[1]);
+        }
+
+        try {
+            String s[] = new String[4];
+            // s = fragTemp.split("_");
+            mainSeekBar[0].setProgress(Integer.parseInt(s[1]) - 1);
+
+
+        } catch (Exception e) {
+            Log.w("MainActivity", "gradCode exception thrown?");
+        }
+
+
+    }
+
+    public void saveFile() {
+
+        SharedPreferences.Editor editor = reader.edit();
+        editor.putString(Values.GENERALSAVEDINFO, String.valueOf(numOfActivatedClasses));
+
+        for (int i = 0; i < Values.numOfClasses; i++) {
+
+            String className = vClassNameInput[i].getText().toString();
+            gradeCode[i] = mainSeekBar[i].getProgress();
+
+            String[] temp = new String[3];
+
+            temp = vCredits[i].getText().toString().split(":");
+
+            if (temp[0].equals("Credits")) {
+                credits[i] = Double.parseDouble(temp[1]);
+            } else credits[i] = 0;
+
+            switch (vClassLevel[i].getText().toString()) {
+                case "College Prep":
+                    buttonToggle[i] = 0;
+                    break;
+                case "Honors":
+                    buttonToggle[i] = 1;
+                    break;
+                case "AP":
+                    buttonToggle[i] = 2;
+                    break;
+            }
+
+            String saveInfo = className + "_" + gradeCode[i] + "_" + credits[i] + "_" + buttonToggle[i];
+            editor.putString(Values.FRAGMENTCODE[i], saveInfo);
+
+            Log.w(saveTag, "SAVED:" + Values.FRAGMENTCODE[i] + ", " + saveInfo);
+            //editor.commit();
+
+        }
+
+        editor.apply();
+    }
+
+
+    public View getView (){
+        return view;
+    }
 }

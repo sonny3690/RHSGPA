@@ -1,5 +1,6 @@
 package com.app.sonny.rhsgpa;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -102,8 +103,8 @@ public class MainActivity extends ActionBarActivity implements SeekBar.OnSeekBar
         credits = new double[numOfClasses];
         classContent = new String[numOfClasses][4]; //1 for class name, 2 for gradecode, 3 for credits, 4 for duration
 
-//        addClassButton = (Button) findViewById(R.id.addClassButton);
-       /* addClassButton.setOnClickListener(new OnClickListener() {
+        addClassButton = (Button) findViewById(R.id.addClassButton);
+ addClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), CourseMenu.class);
@@ -112,7 +113,8 @@ public class MainActivity extends ActionBarActivity implements SeekBar.OnSeekBar
 
 
             }
-        });*/
+        });
+
 
 
     }
