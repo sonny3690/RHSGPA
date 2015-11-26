@@ -38,31 +38,29 @@ public class EditClass extends AppCompatActivity {
 
         init();
         Intent intent = getIntent();
-        String classInfo = intent.getStringExtra(Values.CLASSTAG);
 
-        if (intent != null) {
-            String split[] = intent.getStringExtra(Values.CLASSINDEXTAG).split(":");
-            fragmentNumber = Integer.parseInt(split[0]);
-            classNumber = Integer.parseInt(split[1]);
+        for (int i = 0; i < Values.numOfFragment; i++)
+            for (int j = 0; j < Values.numOfClasses; j++) {
+                String classInfo[] = intent.getStringArrayExtra(Values.FRAGMENTCODE[i][j]);
 
-        } else Log.w("EditClass", "EditClass Intent is null!");
+                if (classInfo != null) {
 
-        if (classInfo != null) {
-            String classSpliced[] = new String[4];
-            classSpliced = classInfo.split("_");
-            Log.w("TEST", classInfo);
-            classNameInput.setText(classSpliced[0]);
-            String temp = classSpliced[1];
-            if (temp.equals("CP"))
-                classLevelDetector(0);
-            else if (temp.equals("H"))
-                classLevelDetector(1);
-            else classLevelDetector(2);
+                    fragmentNumber = i;
+                    classNumber = j;
 
-            credits = Double.parseDouble(classSpliced[2]);
-            creditsSeekBar.setProgress((int) credits * 2);
+                    classNameInput.setText(classInfo[0]);
+                    String temp = classInfo[1];
+                    if (temp.equals("CP"))
+                        classLevelDetector(0);
+                    else if (temp.equals("H"))
+                        classLevelDetector(1);
+                    else classLevelDetector(2);
 
-        }
+                    credits = Double.parseDouble(classInfo[2]);
+                    creditsSeekBar.setProgress((int) credits * 2);
+
+                }
+            }
     }
 
     public void init() {
@@ -110,7 +108,7 @@ public class EditClass extends AppCompatActivity {
                 Intent intent = new Intent(view.getContext(), MainActivity.class);
                 saveFile();
                 SharedPreferences.Editor editor = reader.edit();
-                editor.putString(Values.GENERALSAVEDINFO,String.valueOf( classNumber + 1));
+                editor.putString(Values.GENERALSAVEDINFO, fragmentNumber + ":" + classNumber);
                 editor.apply();
                 //above line sets the viewCard visible
                 startActivity(intent);
@@ -177,17 +175,10 @@ public class EditClass extends AppCompatActivity {
         SharedPreferences.Editor editor = reader.edit();
         String className = classNameInput.getText().toString();
         String saveInfo = className + "_" + "" + "_" + credits + "_" + buttonToggle;
-        Log.w("EditClass", saveInfo);
-        Log.w("EditClass", "Saved String at FragmentCode" + classNumber);
-        editor.putString(Values.FRAGMENTCODE[classNumber], saveInfo); //edit tag needs to be an ARRAY
+        Log.w("EditClass", "fragment #: " + fragmentNumber + " class: " + classNumber + "\t" + saveInfo);
+        editor.putString(Values.FRAGMENTCODE[fragmentNumber][classNumber], saveInfo); //edit tag needs to be an ARRAY
         editor.apply();
 
-        Log.w("savedInstanceState", String.valueOf(classNumber));
-
-        for (int i = 0; i < classNumber; i++) {
-            String temp = reader.getString(Values.FRAGMENTCODE[i], null);
-            Log.w("savedInstanceState", "FragmentCode #" + i + ": " + temp);
-        }
 
     }
 
@@ -197,10 +188,6 @@ public class EditClass extends AppCompatActivity {
         saveFile();
         Log.w("EditClass", "File Saved");
 
-        for (int i = 0; i < classNumber; i++) {
-            String temp = reader.getString(Values.FRAGMENTCODE[i], null);
-            Log.w("savedInstanceState", "FragmentCode #" + i + ": " + temp);
-        }
 
 
     }
@@ -225,8 +212,6 @@ public class EditClass extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         saveFile();
-
-
 
 
     }

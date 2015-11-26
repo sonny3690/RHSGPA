@@ -135,10 +135,7 @@ public class BusinessAndMarketing extends AppCompatActivity implements View.OnCl
 
 
     public void readFile() throws IOException {
-        Log.w(TAG, "File Reading Activated");
         inputStream = getAssets().open(fileName[classIndex] + ".txt");
-        Log.w(TAG, "File Opened");
-
         reader = new BufferedReader(new InputStreamReader(inputStream));
 
         String line;
@@ -147,7 +144,7 @@ public class BusinessAndMarketing extends AppCompatActivity implements View.OnCl
             buttonTitles[buttonCount] = line;
             initializeButton(buttonCount, line);
             buttonCount++;
-            //Log.w(TAG, line + ": " + String.valueOf(buttonCount));
+            Log.w(TAG, line + ": " + String.valueOf(buttonCount));
         }
 
         reader.close();
@@ -161,7 +158,7 @@ public class BusinessAndMarketing extends AppCompatActivity implements View.OnCl
 
         selectButton[buttonCount].setText(split[0]);
 
-        /*for (int i = 0; i<4; i++)
+       /* for (int i = 0; i<4; i++)
             buttonInfo[buttonCount][i] = split [i];*/
        // Log.w(TAG, "button #" + buttonCount + " was created");
 
@@ -179,8 +176,8 @@ public class BusinessAndMarketing extends AppCompatActivity implements View.OnCl
         for (int i = 0; i < numOfClasses; i++) {
             if (v == selectButton[i]) {
                 Intent intent = new Intent(this, EditClass.class);
-                intent.putExtra(CLASSTAG, buttonTitles[i]);
-                intent.putExtra(Values.CLASSINDEXTAG, String.valueOf(fragmentNumber) + ":" + classNumber);
+                intent.putExtra(Values.FRAGMENTCODE[fragmentNumber][classNumber], buttonTitles[i]);
+                //intent.putExtra(Values.CLASSINDEXTAG, String.valueOf(fragmentNumber) + ":" + classNumber);
                 //Log.w(TAG, "SELECTED: " + String.valueOf(i));
                 Log.w(TAG,"CLASSNUMBER:"  +  String.valueOf(classNumber));
                 startActivity(intent);

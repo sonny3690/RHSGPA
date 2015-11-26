@@ -1,5 +1,6 @@
 package com.app.sonny.rhsgpa;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,13 +20,21 @@ public class QuarterFragment extends Fragment {
     ViewPager mPager;
     SlidingTabLayout mSlidingTabLayout;
     ScrollView mScrollView;
-    ViewModeAdapter viewModeAdapter;
+    ViewModeAdapter[] viewModeAdapter = new ViewModeAdapter[Values.numOfFragment];
+
+    int fragIndex, classIndex;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-
+        Intent intent = getActivity().getIntent();
+        if (intent != null && viewModeAdapter[Values.numOfFragment - 1] != null) {
+            String split[] = intent.getStringExtra(Values.GENERALSAVEDINFO).split(":");
+            fragIndex = Integer.parseInt(split[0]);
+            classIndex = Integer.parseInt(split[1]);
+        }
         return inflater.inflate(R.layout.quarter_fragment, container, false);
     }
 
@@ -42,7 +51,13 @@ public class QuarterFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        viewModeAdapter.saveFile();
+
+        for (int i = 0; i < Values.numOfFragment; i++)
+            try {
+                viewModeAdapter[i].saveFile();
+            } catch (Exception e) {
+
+            }
     }
 
     class ViewPagerAdapter extends PagerAdapter {
@@ -64,8 +79,8 @@ public class QuarterFragment extends Fragment {
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
 
-            viewModeAdapter = new ViewModeAdapter(getActivity().getLayoutInflater(), container, false, position);
-            View view = viewModeAdapter.getView();
+            viewModeAdapter[position] = new ViewModeAdapter(getActivity().getLayoutInflater(), container, false, position);
+            View view = viewModeAdapter[position].getView();
 
             /*View view = getActivity().getLayoutInflater().inflate(R.layout.view_mode,
                     container, false);*/
@@ -87,7 +102,7 @@ public class QuarterFragment extends Fragment {
 
 /*TODO
  - edit saving procedure
- * change some color crap
+
 
  * actionbar title
  */

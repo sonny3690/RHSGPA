@@ -77,6 +77,7 @@ public class ViewModeAdapter {
 
         // readFile();
 
+
         vClassNameInput[0] = (TextView) view.findViewById(R.id.vClassNameInput0);
         vClassNameInput[1] = (TextView) view.findViewById(R.id.vClassNameInput1);
         vClassNameInput[2] = (TextView) view.findViewById(R.id.vClassNameInput2);
@@ -153,6 +154,7 @@ public class ViewModeAdapter {
 
         for (int i = 0; i < numOfClasses; i++) {
             setSeekBar(mainSeekBar[i], 11, i);
+            if (i > numOfActivatedClasses)
             vCardView[i].setVisibility(View.GONE);
             trashImageButton[i].setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -187,6 +189,7 @@ public class ViewModeAdapter {
                 Intent intent = new Intent(view.getContext(), CourseMenu.class);
                 intent.putExtra(Values.CLASSINDEXTAG, String.valueOf(fragNum) + ":" + numOfActivatedClasses);
                 view.getContext().startActivity(intent);
+                numOfActivatedClasses++;
 
 
             }
@@ -454,6 +457,8 @@ public class ViewModeAdapter {
             mainSeekBar[j].setProgress(Integer.parseInt(gradeCodeTemp[j])); //may throw numberformaterror?
         }//SHOULD ALL SET THE VARIABLES
 
+
+        //TODO: CHECK THIS LINE
         vCardView[numOfActivatedClasses - 1].setVisibility(View.GONE); //removes the last element
         numOfActivatedClasses--;
 
@@ -596,4 +601,11 @@ public class ViewModeAdapter {
     public View getView (){
         return view;
     }
+
+
+    //TODO: finish addClass () function
+    //// TODO: 11/22/2015  
+    //// TODO: 11/22/2015 make adding classes smoother (all in this class) 
+    
+     
 }
