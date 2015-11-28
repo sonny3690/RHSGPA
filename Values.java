@@ -14,6 +14,7 @@ public class Values {
     public static final int numOfClasses = 7;
     public static final int numOfFragment = 4;
     public static final String[][] FRAGMENTCODE = new String[numOfFragment][numOfClasses];
+    public static final String[][] FRAGMENTCODEbe = new String[numOfFragment][numOfClasses];
     public static final int[] gradeCode = new int[numOfClasses];
     public static final int cpButton[] = {R.id.collegePrepButton0, R.id.collegePrepButton1};
     public static final int honorsButton[] = {R.id.honorsButton0, R.id.honorsButton1};
@@ -27,8 +28,10 @@ public class Values {
     public Values() {
         Log.w("Values", "Values Constructor Called");
         for (int i = 0; i < numOfFragment; i++)
-            for (int j = 0; j < numOfClasses; j++)
+            for (int j = 0; j < numOfClasses; j++) {
                 FRAGMENTCODE[i][j] = "FRAGMENT:" + i + "/" + "CLASS:" + j;
+                FRAGMENTCODEbe[i][j] = "FRAGMENT bus-edit:" + i + "/" + "CLASS:" + j;
+            }
         for (int i = 0; i < numOfClasses; i++)
             GENERALSAVEDINFO[i] = "gensave" + i;
 

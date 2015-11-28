@@ -58,11 +58,14 @@ public class ViewModeAdapter {
     private int fragNum;
     private String classContent[][]; //saved class information; recalled when readFile () is activated
 
-    public ViewModeAdapter (LayoutInflater inflater, ViewGroup container, boolean bundle, int fragNum){
+    public ViewModeAdapter(LayoutInflater inflater, ViewGroup container, boolean bundle, int fragNum) {
         view = inflater.inflate(R.layout.view_mode, container, bundle);
 
+        Log.w("ACTIVATEDCLASSES", "\t" + numOfActivatedClasses);
+
         this.fragNum = fragNum;
-        init ();
+        init();
+        readFile();
     }
 
     public static double round(double value, int places) {
@@ -73,9 +76,9 @@ public class ViewModeAdapter {
         return bd.doubleValue();
     }
 
-    public void init (){
+    public void init() {
 
-        readFile();
+
 
 
         vClassNameInput[0] = (TextView) view.findViewById(R.id.vClassNameInput0);
@@ -153,7 +156,7 @@ public class ViewModeAdapter {
         for (int i = 0; i < numOfClasses; i++) {
             setSeekBar(mainSeekBar[i], 11, i);
             if (i >= numOfActivatedClasses)
-            vCardView[i].setVisibility(View.GONE);
+                vCardView[i].setVisibility(View.GONE);
             trashImageButton[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -161,7 +164,6 @@ public class ViewModeAdapter {
                         if (trashImageButton[i] == view)
                             // vCardView[i].setVisibility(View.GONE);
                             removeCardElements(i);
-                        Log.w("YAYA", "YAYYY");
 
 
                     }
@@ -188,11 +190,9 @@ public class ViewModeAdapter {
                 intent.putExtra(Values.CLASSINDEXTAG, String.valueOf(fragNum) + ":" + numOfActivatedClasses);
                 view.getContext().startActivity(intent);
                 numOfActivatedClasses++;
-
-
+                saveFile();
             }
         });
-
 
 
     }
@@ -484,7 +484,7 @@ public class ViewModeAdapter {
             numOfActivatedClasses = Integer.parseInt(generalTemp);
             Log.w(CONTEXT, generalTemp);
         } catch (Exception e) {
-            numOfActivatedClasses = 0;
+            //numOfActivatedClasses = 0;
             return;
         }
 
@@ -541,8 +541,7 @@ public class ViewModeAdapter {
         }
 
 
-
-            //buttonToggle[index] = Integer.parseInt(separated[1]);
+        //buttonToggle[index] = Integer.parseInt(separated[1]);
 
 
         try {
@@ -600,14 +599,14 @@ public class ViewModeAdapter {
     }
 
 
-    public View getView (){
+    public View getView() {
         return view;
     }
 
 
     //TODO: finish addClass () function
-    //// TODO: 11/22/2015  
-    //// TODO: 11/22/2015 make adding classes smoother (all in this class) 
-    
-     
+    //// TODO: 11/22/2015
+    //// TODO: 11/22/2015 make adding classes smoother (all in this class)
+
+
 }

@@ -183,7 +183,7 @@ public class BusinessAndMarketing extends AppCompatActivity implements View.OnCl
         for (int i = 0; i < numOfClasses; i++) {
             if (v == selectButton[i]) {
                 intent.putExtra(Values.CLASSINDEXTAG, fragmentNumber + ":" + classNumber);
-                intent.putExtra(Values.FRAGMENTCODE[fragmentNumber][i], buttonTitles[i]);
+                intent.putExtra(Values.FRAGMENTCODEbe[fragmentNumber][i], buttonTitles[i]);
 
                 //Log.w(TAG, "SELECTED: " + String.valueOf(i));
                 Log.w(TAG, "CLASSNUMBER:" + String.valueOf(classNumber));

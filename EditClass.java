@@ -24,7 +24,8 @@ public class EditClass extends AppCompatActivity {
 
     private int buttonToggle, classNumber, fragmentNumber;
     private double credits;
-    private String buttonLine;
+
+    private String temp2; //contains all button information
 
     private SharedPreferences reader;
 
@@ -46,7 +47,7 @@ public class EditClass extends AppCompatActivity {
         String[] temp1 = intent.getStringExtra(Values.CLASSINDEXTAG).split(":");
         fragmentNumber = Integer.parseInt(temp1[0]);
         classNumber = Integer.parseInt(temp1[1]);
-        String temp2 = intent.getStringExtra(Values.FRAGMENTCODE[fragmentNumber][classNumber]);
+        String temp2 = intent.getStringExtra(Values.FRAGMENTCODEbe[fragmentNumber][classNumber]);
         String classInfo[] = temp2.split("_");
 
         if (classInfo != null) {
@@ -112,7 +113,7 @@ public class EditClass extends AppCompatActivity {
 
                 //SAVING DONE
                 SharedPreferences.Editor editor = reader.edit();
-                editor.putString(Values.FRAGMENTCODE[fragmentNumber][classNumber], buttonLine);
+                editor.putString(Values.FRAGMENTCODE[fragmentNumber][classNumber], temp2);
 
                 editor.apply();
 
