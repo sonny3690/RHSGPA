@@ -24,6 +24,7 @@ public class EditClass extends AppCompatActivity {
 
     private int buttonToggle, classNumber, fragmentNumber;
     private double credits;
+    private String buttonLine;
 
     private SharedPreferences reader;
 
@@ -39,28 +40,30 @@ public class EditClass extends AppCompatActivity {
         init();
         Intent intent = getIntent();
 
-        for (int i = 0; i < Values.numOfFragment; i++)
-            for (int j = 0; j < Values.numOfClasses; j++) {
-                String classInfo[] = intent.getStringArrayExtra(Values.FRAGMENTCODE[i][j]);
 
-                if (classInfo != null) {
+        //editclass will never be called with empty intent
 
-                    fragmentNumber = i;
-                    classNumber = j;
+        String[] temp1 = intent.getStringExtra(Values.CLASSINDEXTAG).split(":");
+        fragmentNumber = Integer.parseInt(temp1[0]);
+        classNumber = Integer.parseInt(temp1[1]);
+        String temp2 = intent.getStringExtra(Values.FRAGMENTCODE[fragmentNumber][classNumber]);
+        String classInfo[] = temp2.split("_");
 
-                    classNameInput.setText(classInfo[0]);
-                    String temp = classInfo[1];
-                    if (temp.equals("CP"))
-                        classLevelDetector(0);
-                    else if (temp.equals("H"))
-                        classLevelDetector(1);
-                    else classLevelDetector(2);
+        if (classInfo != null) {
 
-                    credits = Double.parseDouble(classInfo[2]);
-                    creditsSeekBar.setProgress((int) credits * 2);
+            classNameInput.setText(classInfo[0]);
+            String temp = classInfo[1];
+            if (temp.equals("CP"))
+                classLevelDetector(0);
+            else if (temp.equals("H"))
+                classLevelDetector(1);
+            else classLevelDetector(2);
 
-                }
-            }
+            credits = Double.parseDouble(classInfo[2]);
+            creditsSeekBar.setProgress((int) credits * 2);
+
+        }
+
     }
 
     public void init() {
@@ -106,11 +109,13 @@ public class EditClass extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), MainActivity.class);
-                saveFile();
+
+                //SAVING DONE
                 SharedPreferences.Editor editor = reader.edit();
-                editor.putString(Values.GENERALSAVEDINFO, fragmentNumber + ":" + classNumber);
+                editor.putString(Values.FRAGMENTCODE[fragmentNumber][classNumber], buttonLine);
+
                 editor.apply();
-                //above line sets the viewCard visible
+
                 startActivity(intent);
             }
         });
@@ -170,7 +175,7 @@ public class EditClass extends AppCompatActivity {
         }
     }
 
-    public void saveFile() {
+   /* public void saveFile() {
 
         SharedPreferences.Editor editor = reader.edit();
         String className = classNameInput.getText().toString();
@@ -180,14 +185,13 @@ public class EditClass extends AppCompatActivity {
         editor.apply();
 
 
-    }
+    }*/
 
     @Override
     protected void onPause() {
         super.onPause();
-        saveFile();
-        Log.w("EditClass", "File Saved");
 
+        Log.w("EditClass", "File Saved");
 
 
     }
@@ -195,7 +199,7 @@ public class EditClass extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        saveFile();
+
         Log.w("EditClass", "File Saved");
 
 
@@ -211,7 +215,6 @@ public class EditClass extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        saveFile();
 
 
     }

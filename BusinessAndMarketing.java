@@ -33,6 +33,7 @@ public class BusinessAndMarketing extends AppCompatActivity implements View.OnCl
     private LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1.0f);
     private LinearLayout linearLayout;
     private String buttonInfo[][];
+    private String buttonLine;
     //private ScrollView scrollView;
     private String buttonTitles[];
     private String TITLE = "";
@@ -97,6 +98,8 @@ public class BusinessAndMarketing extends AppCompatActivity implements View.OnCl
         int temp = Integer.parseInt(classInfo);
 
         switch (temp) {
+            //// TODO: 11/27/2015 check if the numbers are correct
+
             case R.id.businessCourses:
                 numOfClasses = 9;
                 return 0;
@@ -144,7 +147,7 @@ public class BusinessAndMarketing extends AppCompatActivity implements View.OnCl
             buttonTitles[buttonCount] = line;
             initializeButton(buttonCount, line);
             buttonCount++;
-            Log.w(TAG, line + ": " + String.valueOf(buttonCount));
+            // Log.w(TAG, line + ": " + String.valueOf(buttonCount));
         }
 
         reader.close();
@@ -153,14 +156,15 @@ public class BusinessAndMarketing extends AppCompatActivity implements View.OnCl
     }
 
     public void initializeButton(int buttonCount, String buttonTitle) {
-        //selectButton[buttonCount].setText(buttonTitle);
         String split[] = buttonTitle.split("_");
 
         selectButton[buttonCount].setText(split[0]);
 
+
+        buttonLine = buttonTitle;
        /* for (int i = 0; i<4; i++)
             buttonInfo[buttonCount][i] = split [i];*/
-       // Log.w(TAG, "button #" + buttonCount + " was created");
+        // Log.w(TAG, "button #" + buttonCount + " was created");
 
     }
 
@@ -173,20 +177,22 @@ public class BusinessAndMarketing extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View v) {
+        Intent intent = new Intent(this, EditClass.class);
+        intent.putExtra(Values.CLASSTAG, fragmentNumber);
+
         for (int i = 0; i < numOfClasses; i++) {
             if (v == selectButton[i]) {
-                Intent intent = new Intent(this, EditClass.class);
-                intent.putExtra(Values.FRAGMENTCODE[fragmentNumber][classNumber], buttonTitles[i]);
-                //intent.putExtra(Values.CLASSINDEXTAG, String.valueOf(fragmentNumber) + ":" + classNumber);
-                //Log.w(TAG, "SELECTED: " + String.valueOf(i));
-                Log.w(TAG,"CLASSNUMBER:"  +  String.valueOf(classNumber));
-                startActivity(intent);
+                intent.putExtra(Values.CLASSINDEXTAG, fragmentNumber + ":" + classNumber);
+                intent.putExtra(Values.FRAGMENTCODE[fragmentNumber][i], buttonTitles[i]);
 
+                //Log.w(TAG, "SELECTED: " + String.valueOf(i));
+                Log.w(TAG, "CLASSNUMBER:" + String.valueOf(classNumber));
             } else {
 
             }
 
         }
+        startActivity(intent);
 
     }
 }

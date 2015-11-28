@@ -30,11 +30,11 @@ public class QuarterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         Intent intent = getActivity().getIntent();
-        if (intent != null && viewModeAdapter[Values.numOfFragment - 1] != null) {
-            String split[] = intent.getStringExtra(Values.GENERALSAVEDINFO).split(":");
+        /*if (intent != null && viewModeAdapter[Values.numOfFragment - 1] != null) {
+            String split[] = intent.getStringExtra(Values.GENERALSAVEDINFO[fragIndex]).split(":");
             fragIndex = Integer.parseInt(split[0]);
             classIndex = Integer.parseInt(split[1]);
-        }
+        }*/
         return inflater.inflate(R.layout.quarter_fragment, container, false);
     }
 

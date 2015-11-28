@@ -75,7 +75,7 @@ public class ViewModeAdapter {
 
     public void init (){
 
-        // readFile();
+        readFile();
 
 
         vClassNameInput[0] = (TextView) view.findViewById(R.id.vClassNameInput0);
@@ -150,11 +150,9 @@ public class ViewModeAdapter {
         vCardView[6] = (CardView) view.findViewById(R.id.cardView6);
 
 
-        vClassNameInput[0].setText ("2332");
-
         for (int i = 0; i < numOfClasses; i++) {
             setSeekBar(mainSeekBar[i], 11, i);
-            if (i > numOfActivatedClasses)
+            if (i >= numOfActivatedClasses)
             vCardView[i].setVisibility(View.GONE);
             trashImageButton[i].setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -459,7 +457,7 @@ public class ViewModeAdapter {
 
 
         //TODO: CHECK THIS LINE
-        vCardView[numOfActivatedClasses - 1].setVisibility(View.GONE); //removes the last element
+        vCardView[numOfActivatedClasses].setVisibility(View.GONE); //removes the last element
         numOfActivatedClasses--;
 
         saveFile();
@@ -480,14 +478,14 @@ public class ViewModeAdapter {
         return b;
     }
 
-    public void readFile() {
-        String generalTemp = reader.getString(Values.GENERALSAVEDINFO, null);
-
+    public void readFile() throws java.lang.NullPointerException {
         try {
+            String generalTemp = reader.getString(Values.GENERALSAVEDINFO[fragNum], null);
             numOfActivatedClasses = Integer.parseInt(generalTemp);
             Log.w(CONTEXT, generalTemp);
         } catch (Exception e) {
             numOfActivatedClasses = 0;
+            return;
         }
 
 
@@ -498,8 +496,9 @@ public class ViewModeAdapter {
         String separated[] = new String[4];
         String[] fragTemp = new String[numOfClasses];
 
+
         for (int i = 0; i < numOfClasses; i++) {
-            fragTemp[i] = reader.getString(Values.FRAGMENTCODE[i], null); //EACH  CLASS INFORMATION}
+            fragTemp[i] = reader.getString(Values.FRAGMENTCODE[fragNum][i], null); //EACH  CLASS INFORMATION}
         }
 
         for (int i = 0; i < numOfClasses; i++) {
@@ -539,9 +538,12 @@ public class ViewModeAdapter {
             }
 
             buttonToggle[index] = Integer.parseInt(separated[3]);
+        }
+
+
 
             //buttonToggle[index] = Integer.parseInt(separated[1]);
-        }
+
 
         try {
             String s[] = new String[4];
@@ -559,7 +561,7 @@ public class ViewModeAdapter {
     public void saveFile() {
 
         SharedPreferences.Editor editor = reader.edit();
-        editor.putString(Values.GENERALSAVEDINFO, String.valueOf(numOfActivatedClasses));
+        editor.putString(Values.GENERALSAVEDINFO[fragNum], String.valueOf(numOfActivatedClasses));
 
         for (int i = 0; i < Values.numOfClasses; i++) {
 
@@ -587,9 +589,9 @@ public class ViewModeAdapter {
             }
 
             String saveInfo = className + "_" + gradeCode[i] + "_" + credits[i] + "_" + buttonToggle[i];
-            editor.putString(Values.FRAGMENTCODE[fragNum], saveInfo);
+            editor.putString(Values.FRAGMENTCODE[fragNum][i], saveInfo);
 
-            Log.w(saveTag, "SAVED:" + Values.FRAGMENTCODE[fragNum] + ", " + saveInfo);
+            //Log.w(saveTag, "SAVED:" + Values.FRAGMENTCODE[fragNum] + ", " + saveInfo);
             //editor.commit();
 
         }

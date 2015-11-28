@@ -1,5 +1,6 @@
 package com.app.sonny.rhsgpa;
 
+import android.util.Log;
 import android.widget.TextView;
 
 /**
@@ -9,7 +10,7 @@ public class Values {
     public static final String ERRORTAG = "com.sonny.ERROR";
     public static final String CLASSTAG = "CLASSSELECTION";
     public static final String CLASSINDEXTAG = "CLASSINDEXTAG";
-    public static final String GENERALSAVEDINFO = "GENERALSAVEDINFO";
+    public static final String GENERALSAVEDINFO[] = new String[4];
     public static final int numOfClasses = 7;
     public static final int numOfFragment = 4;
     public static final String[][] FRAGMENTCODE = new String[numOfFragment][numOfClasses];
@@ -24,9 +25,12 @@ public class Values {
 
 
     public Values() {
+        Log.w("Values", "Values Constructor Called");
         for (int i = 0; i < numOfFragment; i++)
             for (int j = 0; j < numOfClasses; j++)
                 FRAGMENTCODE[i][j] = "FRAGMENT:" + i + "/" + "CLASS:" + j;
+        for (int i = 0; i < numOfClasses; i++)
+            GENERALSAVEDINFO[i] = "gensave" + i;
 
 
     }
